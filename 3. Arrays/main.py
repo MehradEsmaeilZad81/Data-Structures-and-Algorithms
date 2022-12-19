@@ -21,6 +21,12 @@ class Array:
         if self.Array[self.size//2] is None:
             self.Array = self.Array[:self.size//2]
 
+    def indexOf(self, value):
+        for i in range(self._index):
+            if self.Array[i] == value:
+                return i
+        return -1
+
     def __str__(self):
         return str(self.Array)
 
@@ -38,4 +44,6 @@ Array1.insert(7)
 Array1.insert(8)
 Array1.remove(3)
 print(Array1)
+print(Array1.indexOf(6))
 # Output: [1, 2, 4, 5, 6, 7, 8, None, None, None]
+# Output: 3
