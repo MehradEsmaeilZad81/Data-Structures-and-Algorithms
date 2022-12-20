@@ -81,7 +81,17 @@ class LinkedList(object):
                 self._tail._next = None
         else:
             raise RuntimeError('List is empty')
-
+        
+    def size(self):
+        if self._isEmpty():
+            return 0
+        current = self._head
+        count = 0
+        while current:
+            count += 1
+            current = current._next
+        return count
+    
     def __str__(self):
         current = self._head
         output = ''
@@ -100,12 +110,16 @@ list.addLast(30)
 print(list)
 print(list.indexOf(10))
 print(list.contains(20))
+print('size:',list.size())
 list.removeFirst()
 print(list)
 list.removeLast()
+print('size:',list.size())
 print(list)
 # Output: 40 10 20 30
 # Output: 1
 # Output: True
+# Output: size: 4
 # Output: 10 20 30
+# Output: size: 2
 # Output: 10 20
