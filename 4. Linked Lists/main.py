@@ -8,6 +8,7 @@ class LinkedList(object):
     def __init__(self, head=None):
         self._head = head
         self._tail = None
+        self._size = 0
 
     def _isEmpty(self):
         if self._head == None:
@@ -22,6 +23,7 @@ class LinkedList(object):
         else:
             self._tail._next = node
             self._tail = node
+        self._size += 1
 
     def addFirst(self, item):
         node = Node(item)
@@ -31,6 +33,7 @@ class LinkedList(object):
         else:
             node._next = self._head
             self._head = node
+        self._size += 1
 
     def indexOf(self, item):
         if not self._isEmpty():
@@ -60,6 +63,7 @@ class LinkedList(object):
                 self._tail = None
             else:
                 self._head = self._head._next
+            self._size -= 1
         else:
             raise RuntimeError('List is empty')
 
@@ -79,18 +83,12 @@ class LinkedList(object):
                 previous = self._getPrevious(self._tail)
                 self._tail = previous
                 self._tail._next = None
+            self._size -= 1
         else:
             raise RuntimeError('List is empty')
         
     def size(self):
-        if self._isEmpty():
-            return 0
-        current = self._head
-        count = 0
-        while current:
-            count += 1
-            current = current._next
-        return count
+        return self._size
     
     def __str__(self):
         current = self._head
