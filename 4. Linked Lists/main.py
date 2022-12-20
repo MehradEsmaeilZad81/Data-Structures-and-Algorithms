@@ -86,10 +86,10 @@ class LinkedList(object):
             self._size -= 1
         else:
             raise RuntimeError('List is empty')
-        
+
     def size(self):
         return self._size
-    
+
     def __str__(self):
         current = self._head
         output = ''
@@ -108,11 +108,11 @@ list.addLast(30)
 print(list)
 print(list.indexOf(10))
 print(list.contains(20))
-print('size:',list.size())
+print('size:', list.size())
 list.removeFirst()
 print(list)
 list.removeLast()
-print('size:',list.size())
+print('size:', list.size())
 print(list)
 # Output: 40 10 20 30
 # Output: 1
