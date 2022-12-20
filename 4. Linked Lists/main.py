@@ -60,7 +60,8 @@ class LinkedList(object):
                 self._tail = None
             else:
                 self._head = self._head._next
-        raise Exception('List is empty')
+        else:
+            raise RuntimeError()('List is empty')
 
     def removeLast(self):
         if not self._isEmpty():
@@ -75,7 +76,8 @@ class LinkedList(object):
                         self._tail = current
                         break
                     current = current._next
-        raise Exception('List is empty')
+        else:
+            raise RuntimeError('List is empty')
 
     def __str__(self):
         current = self._head
