@@ -32,6 +32,17 @@ class LinkedList(object):
             node._next = self._head
             self._head = node
 
+    def indexOf(self, item):
+        if not self._isEmpty():
+            index = 0
+            current = self._head
+            while current:
+                if current._value == item:
+                    return index
+                index += 1
+                current = current._next
+        return -1
+
     def __str__(self):
         current = self._head
         output = ''
@@ -48,4 +59,8 @@ list.addLast(20)
 list.addFirst(40)
 list.addLast(30)
 print(list)
+print(list.indexOf(10))
+print(list.indexOf(444))
 # Output: 40 10 20 30
+# Output: 1
+# Output: -1
