@@ -43,6 +43,15 @@ class LinkedList(object):
                 current = current._next
         return -1
 
+    def contain(self, item):
+        if not self._isEmpty():
+            current = self._head
+            while current:
+                if current._value == item:
+                    return True
+                current = current._next
+        return False
+
     def __str__(self):
         current = self._head
         output = ''
@@ -60,7 +69,7 @@ list.addFirst(40)
 list.addLast(30)
 print(list)
 print(list.indexOf(10))
-print(list.indexOf(444))
+print(list.contain(20))
 # Output: 40 10 20 30
 # Output: 1
-# Output: -1
+# Output: True
