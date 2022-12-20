@@ -52,6 +52,14 @@ class LinkedList(object):
                 current = current._next
         return False
         # return self.indexOf(item) != -1 !!
+    
+    def removeFirst(self):
+        if not self._isEmpty():
+            if self._head == self._tail:
+                self._head = None
+                self._tail = None
+            else:
+                self._head = self._head._next
 
     def __str__(self):
         current = self._head
@@ -71,6 +79,9 @@ list.addLast(30)
 print(list)
 print(list.indexOf(10))
 print(list.contains(20))
+list.removeFirst()
+print(list)
 # Output: 40 10 20 30
 # Output: 1
 # Output: True
+# Output: 10 20 30
