@@ -52,7 +52,7 @@ class LinkedList(object):
                 current = current._next
         return False
         # return self.indexOf(item) != -1 !!
-    
+
     def removeFirst(self):
         if not self._isEmpty():
             if self._head == self._tail:
@@ -60,6 +60,7 @@ class LinkedList(object):
                 self._tail = None
             else:
                 self._head = self._head._next
+        raise Exception('List is empty')
 
     def removeLast(self):
         if not self._isEmpty():
@@ -74,7 +75,8 @@ class LinkedList(object):
                         self._tail = current
                         break
                     current = current._next
-    
+        raise Exception('List is empty')
+
     def __str__(self):
         current = self._head
         output = ''
