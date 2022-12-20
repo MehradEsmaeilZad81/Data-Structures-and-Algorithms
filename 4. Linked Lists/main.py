@@ -63,19 +63,22 @@ class LinkedList(object):
         else:
             raise RuntimeError('List is empty')
 
+    def _getPrevious(self, node):
+        current = self._head
+        while current:
+            if current._next == node:
+                return current
+            current = current._next
+
     def removeLast(self):
         if not self._isEmpty():
             if self._head == self._tail:
                 self._head = None
                 self._tail = None
             else:
-                current = self._head
-                while current:
-                    if current._next == self._tail:
-                        current._next = None
-                        self._tail = current
-                        break
-                    current = current._next
+                previous = self._getPrevious(self._tail)
+                self._tail = previous
+                self._tail._next = None
         else:
             raise RuntimeError('List is empty')
 
