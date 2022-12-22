@@ -1,5 +1,5 @@
 class Node:
-    def __init__(self, value):
+    def __init__(self, value=None):
         self._value = value
         self._next = None
 
@@ -90,6 +90,20 @@ class LinkedList(object):
     def size(self):
         return self._size
 
+    def reverse(self):
+        if not self._isEmpty():
+            previous = self._head
+            current = self._head._next
+            while current:
+                next = current._next
+                current._next = previous
+                previous = current
+                current = next
+
+            self._tail = self._head
+            self._tail._next = None
+            self._head = previous
+
     def __str__(self):
         current = self._head
         output = ''
@@ -105,19 +119,23 @@ list.addLast(10)
 list.addLast(20)
 list.addFirst(40)
 list.addLast(30)
+list.reverse()
 print(list)
 print(list.indexOf(10))
 print(list.contains(20))
 print('size:', list.size())
 list.removeFirst()
 print(list)
+list.reverse()
 list.removeLast()
 print('size:', list.size())
 print(list)
-# Output: 40 10 20 30
-# Output: 1
-# Output: True
-# Output: size: 4
-# Output: 10 20 30
-# Output: size: 2
-# Output: 10 20
+
+# Output:
+# 30 20 10 40
+# 2
+# True
+# size: 4
+# 20 10 40
+# size: 2
+# 40 10
