@@ -104,6 +104,22 @@ class LinkedList(object):
             self._tail._next = None
             self._head = previous
 
+    def getKthFromTheEnd(self, k):
+        if not self._isEmpty():
+            a = self._head
+            b = self._head
+            for i in range(k):
+                b = b._next
+                if b == None:
+                    raise RuntimeError(
+                        'k is greater than the size of the list')
+            while b:
+                a = a._next
+                b = b._next
+            return a._value
+        else:
+            raise RuntimeError('List is empty')
+
     def __str__(self):
         current = self._head
         output = ''
@@ -119,6 +135,8 @@ list.addLast(10)
 list.addLast(20)
 list.addFirst(40)
 list.addLast(30)
+print(list.getKthFromTheEnd(2))
+print(list)
 list.reverse()
 print(list)
 print(list.indexOf(10))
@@ -132,6 +150,8 @@ print('size:', list.size())
 print(list)
 
 # Output:
+# 20
+# 40 10 20 30
 # 30 20 10 40
 # 2
 # True
