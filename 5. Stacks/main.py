@@ -18,15 +18,30 @@ class Stack:
         return str(self.items)
 
 
+def reverse_string(string):
+    stack = Stack()
+    for char in string:
+        stack.push(char)
+    reversed_string = ""
+    while not stack.is_empty():
+        reversed_string += stack.pop()
+    return reversed_string
+
+
 # Test
-stack = Stack()
-stack.push("A")
-stack.push("B")
-stack.push("C")
-print(stack)
-print(stack.peek())
-stack.pop()
-print(stack)
+print(reverse_string("I Love Mercedes"))
+# Output: sedarbeM evoL I
+
+
+# Test
+# stack = Stack()
+# stack.push("A")
+# stack.push("B")
+# stack.push("C")
+# print(stack)
+# print(stack.peek())
+# stack.pop()
+# print(stack)
 # Output: ['A', 'B', 'C']
 # Output: C
 # Output: ['A', 'B']
