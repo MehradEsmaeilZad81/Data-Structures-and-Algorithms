@@ -28,11 +28,37 @@ def reverse_string(string):
     return reversed_string
 
 
+def isBalanced(string):
+    def match(left, right):
+        open = "({[<"
+        close = ")}]>"
+        return open.index(left) == close.index(right)
+    stack = Stack()
+    for char in string:
+        if char in "({[<":
+            stack.push(char)
+        elif char in ")}]>":
+            if stack.is_empty():
+                return False
+            if not match(stack.pop(), char):
+                return False
+    return stack.is_empty()
+
+
 # Test
-print(reverse_string("I Love Mercedes"))
+print(isBalanced("({[]})"))
+# Output: True
+# Test
+print(isBalanced("({[})"))
+# Output: False
+# Test
+print(isBalanced("(())[{<}))]"))
+# Output: False
+
+
+# Test
+# print(reverse_string("I Love Mercedes"))
 # Output: sedarbeM evoL I
-
-
 # Test
 # stack = Stack()
 # stack.push("A")
