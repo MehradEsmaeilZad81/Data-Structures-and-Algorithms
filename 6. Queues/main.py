@@ -19,6 +19,9 @@ class Queue:
         self._count -= 1
         return item
 
+    def isEmpty(self):
+        return self._count == 0
+
     def __str__(self):
         return str(self._items)
 
