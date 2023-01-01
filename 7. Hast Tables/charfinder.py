@@ -11,6 +11,17 @@ def findFirstNonRepeatedChar(str):
     return None
 
 
+def findFirstRepeatedChar(str):
+    charSet = set()
+    for char in str:
+        if char in charSet:
+            return char
+        else:
+            charSet.add(char)
+    return None
+
+
 # Test
 str = "a green apple"
 print(findFirstNonRepeatedChar(str))
+print(findFirstRepeatedChar(str))
