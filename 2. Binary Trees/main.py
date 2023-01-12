@@ -62,6 +62,14 @@ class BinaryTree:
         self.traversePostOrder(root.rightChild)
         print(root.value, end=" ")
 
+    def height(self, root: Node):
+        if root is None:
+            return -1
+        if root.leftChild == None and root.rightChild == None:
+            return 0
+
+        return 1 + max(self.height(root.leftChild), self.height(root.rightChild))
+
     def __str__(self):
         return str(self.root.value)
 
@@ -79,6 +87,8 @@ print()
 tree.traverseInOrder(tree.root)
 print()
 tree.traversePostOrder(tree.root)
+print()
+print(tree.height(tree.root))
 # Output: 5 4 3 2 7 6 8
 #         2 3 4 5 6 7 8
 #         2 3 4 6 8 7 5
