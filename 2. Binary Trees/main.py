@@ -39,6 +39,17 @@ class BinaryTree:
                 else:
                     return
 
+    def find(self, value: int):
+        current = self.root
+        while current is not None:
+            if value < current.value:
+                current = current.leftChild
+            elif value > current.value:
+                current = current.rightChild
+            else:
+                return True
+        return False
+
     def __str__(self):
         return str(self.root)
 
