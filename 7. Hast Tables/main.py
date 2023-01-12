@@ -31,6 +31,16 @@ class HashTable:
                     return entry.value
         return None
 
+    def remove(self, key: int):
+        index = self._hash(key)
+        bucket = self.entries[index]
+        if bucket:
+            for entry in bucket:
+                if entry.key == key:
+                    bucket.remove(entry)
+                    return
+        raise KeyError("Key not found")
+
     def _hash(self, key: int):
         return key % self.capacity
 
@@ -44,4 +54,9 @@ table.put(4, "d")
 table.put(5, "e")
 table.put(6, "f")
 print(table.get(1))
+print(table.get(2))
+table.remove(2)
+print(table.get(2))
 # Output: a
+#         b
+#         None
