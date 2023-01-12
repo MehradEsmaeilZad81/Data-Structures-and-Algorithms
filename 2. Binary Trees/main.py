@@ -8,15 +8,6 @@ class BinaryTree:
             self.leftChild = None
             self.rightChild = None
 
-        def __str__(self):
-            list = []
-            if self.leftChild is not None:
-                list.insert(0, str((self.leftChild)))
-            list.append(self.value)
-            if self.rightChild is not None:
-                list.append(str(self.rightChild))
-            return str(list)
-
     def insert(self, value: int):
         if self.root is None:
             self.root = self.Node(value)
@@ -50,8 +41,29 @@ class BinaryTree:
                 return True
         return False
 
+    def traversePreOrder(self, root: Node):
+        if root is None:
+            return
+        print(root.value, end=" ")
+        self.traversePreOrder(root.leftChild)
+        self.traversePreOrder(root.rightChild)
+
+    def traverseInOrder(self, root: Node):
+        if root is None:
+            return
+        self.traverseInOrder(root.leftChild)
+        print(root.value, end=" ")
+        self.traverseInOrder(root.rightChild)
+
+    def traversePostOrder(self, root: Node):
+        if root is None:
+            return
+        self.traversePostOrder(root.leftChild)
+        self.traversePostOrder(root.rightChild)
+        print(root.value, end=" ")
+
     def __str__(self):
-        return str(self.root)
+        return str(self.root.value)
 
 
 tree = BinaryTree()
@@ -62,5 +74,11 @@ tree.insert(7)
 tree.insert(8)
 tree.insert(6)
 tree.insert(2)
-print(tree)
-# Output: [2, 3, [4, 5, [6, 7, 8]]]
+tree.traversePreOrder(tree.root)
+print()
+tree.traverseInOrder(tree.root)
+print()
+tree.traversePostOrder(tree.root)
+# Output: 5 4 3 2 7 6 8
+#         2 3 4 5 6 7 8
+#         2 3 4 6 8 7 5
