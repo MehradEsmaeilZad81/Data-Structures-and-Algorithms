@@ -136,6 +136,21 @@ class BinaryTree:
 
         return self._isBinarySearchTree(root.leftChild, min, root.value - 1) and self._isBinarySearchTree(root.rightChild, root.value + 1, max)
 
+    def getNodesAtDistance(self, distance: int):
+        height = self.height()
+        if distance > height:
+            raise Exception("Distance is greater than height of the tree")
+        self._getNodesAtDistance(self.root, distance)
+
+    def _getNodesAtDistance(self, root: Node, distance: int):
+        if root is None:
+            return
+        if distance == 0:
+            print(root.value, end=" ")
+            return
+        self._getNodesAtDistance(root.leftChild, distance - 1)
+        self._getNodesAtDistance(root.rightChild, distance - 1)
+
     def __str__(self):
         return str(self.root.value)
 
@@ -178,6 +193,7 @@ print(tree.isBinarySearchTree())
 tree2.swapRoot()
 print(tree.equals(tree2))
 print(tree2.isBinarySearchTree())
+tree.getNodesAtDistance(2)
 # Output: 5 4 3 2 1 7 6 8 10 9 11
 #         1 2 3 4 5 6 7 8 9 10 11
 #         1 2 3 4 6 9 11 10 8 7 5
@@ -187,3 +203,4 @@ print(tree2.isBinarySearchTree())
 #         True
 #         False
 #         False
+#         3 6 8
