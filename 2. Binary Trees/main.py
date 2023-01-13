@@ -140,6 +140,7 @@ class BinaryTree:
         return str(self.root.value)
 
 
+# Test
 tree = BinaryTree()
 tree.insert(5)
 tree.insert(4)
