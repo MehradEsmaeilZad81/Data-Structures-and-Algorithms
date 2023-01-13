@@ -83,23 +83,29 @@ class BinaryTree:
         return 1 + max(self._height(root.leftChild), self._height(root.rightChild))
 
     def min(self):
-        return self._min(self.root)
+        if self.root is None:
+            raise Exception("Tree is empty")
 
-    def _min(self, root: Node):
-        if root is None:
-            return
-        if root.leftChild == None and root.rightChild == None:
-            return root.value
+        cuurent = self.root
+        while cuurent.leftChild is not None:
+            cuurent = cuurent.leftChild
+        return cuurent.value
 
-        left = self._min(root.leftChild)
-        right = self._min(root.rightChild)
+    # def _min(self, root: Node):
+    #     if root is None:
+    #         return
+    #     if root.leftChild == None and root.rightChild == None:
+    #         return root.value
 
-        if left is None:
-            return min(right, root.value)
-        if right is None:
-            return min(left, root.value)
+    #     left = self._min(root.leftChild)
+    #     right = self._min(root.rightChild)
 
-        return min(left, right, root.value)
+    #     if left is None:
+    #         return min(right, root.value)
+    #     if right is None:
+    #         return min(left, root.value)
+
+    #     return min(left, right, root.value)
 
     def __str__(self):
         return str(self.root.value)
@@ -113,6 +119,10 @@ tree.insert(7)
 tree.insert(8)
 tree.insert(6)
 tree.insert(2)
+tree.insert(10)
+tree.insert(9)
+tree.insert(11)
+tree.insert(1)
 tree.traversePreOrder()
 print()
 tree.traverseInOrder()
@@ -121,8 +131,8 @@ tree.traversePostOrder()
 print()
 print(tree.height())
 print(tree.min())
-# Output: 5 4 3 2 7 6 8
-#         2 3 4 5 6 7 8
-#         2 3 4 6 8 7 5
-#         3
-#         2
+# Output: 5 4 3 2 1 7 6 8 10 9 11
+#         1 2 3 4 5 6 7 8 9 10 11
+#         1 2 3 4 6 9 11 10 8 7 5
+#         4
+#         1
