@@ -106,6 +106,18 @@ class BinaryTree:
     #         return min(left, root.value)
 
     #     return min(left, right, root.value)
+    def equals(self, other: "BinaryTree"):
+        if other is None:
+            raise Exception("Other tree is empty")
+        return self._equals(self.root, other.root)
+
+    def _equals(self, root1: Node, root2: Node):
+        if root1 is None and root2 is None:
+            return True
+        if root1 is not None and root2 is not None:
+            return root1.value == root2.value and self._equals(root1.leftChild, root2.leftChild) and self._equals(root1.rightChild, root2.rightChild)
+
+        return False
 
     def __str__(self):
         return str(self.root.value)
@@ -131,8 +143,22 @@ tree.traversePostOrder()
 print()
 print(tree.height())
 print(tree.min())
+tree2 = BinaryTree()
+tree2.insert(5)
+tree2.insert(4)
+tree2.insert(3)
+tree2.insert(7)
+tree2.insert(8)
+tree2.insert(6)
+tree2.insert(2)
+tree2.insert(10)
+tree2.insert(9)
+tree2.insert(11)
+tree2.insert(1)
+print(tree.equals(tree2))
 # Output: 5 4 3 2 1 7 6 8 10 9 11
 #         1 2 3 4 5 6 7 8 9 10 11
 #         1 2 3 4 6 9 11 10 8 7 5
 #         4
 #         1
+#         True
