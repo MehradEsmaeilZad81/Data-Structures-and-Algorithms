@@ -119,6 +119,23 @@ class BinaryTree:
 
         return False
 
+    # Just for testing
+    def swapRoot(self):
+        temp = self.root.leftChild
+        self.root.leftChild = self.root.rightChild
+        self.root.rightChild = temp
+
+    def isBinarySearchTree(self):
+        return self._isBinarySearchTree(self.root, float("-inf"), float("inf"))
+
+    def _isBinarySearchTree(self, root: Node, min: int, max: int):
+        if root is None:
+            return True
+        if root.value < min or root.value > max:
+            return False
+
+        return self._isBinarySearchTree(root.leftChild, min, root.value - 1) and self._isBinarySearchTree(root.rightChild, root.value + 1, max)
+
     def __str__(self):
         return str(self.root.value)
 
@@ -156,9 +173,16 @@ tree2.insert(9)
 tree2.insert(11)
 tree2.insert(1)
 print(tree.equals(tree2))
+print(tree.isBinarySearchTree())
+tree2.swapRoot()
+print(tree.equals(tree2))
+print(tree2.isBinarySearchTree())
 # Output: 5 4 3 2 1 7 6 8 10 9 11
 #         1 2 3 4 5 6 7 8 9 10 11
 #         1 2 3 4 6 9 11 10 8 7 5
 #         4
 #         1
 #         True
+#         True
+#         False
+#         False
