@@ -82,6 +82,25 @@ class BinaryTree:
 
         return 1 + max(self._height(root.leftChild), self._height(root.rightChild))
 
+    def min(self):
+        return self._min(self.root)
+
+    def _min(self, root: Node):
+        if root is None:
+            return
+        if root.leftChild == None and root.rightChild == None:
+            return root.value
+
+        left = self._min(root.leftChild)
+        right = self._min(root.rightChild)
+
+        if left is None:
+            return min(right, root.value)
+        if right is None:
+            return min(left, root.value)
+
+        return min(left, right, root.value)
+
     def __str__(self):
         return str(self.root.value)
 
@@ -101,7 +120,9 @@ print()
 tree.traversePostOrder()
 print()
 print(tree.height())
+print(tree.min())
 # Output: 5 4 3 2 7 6 8
 #         2 3 4 5 6 7 8
 #         2 3 4 6 8 7 5
 #         3
+#         2
