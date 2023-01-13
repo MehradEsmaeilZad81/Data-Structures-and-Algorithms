@@ -41,34 +41,46 @@ class BinaryTree:
                 return True
         return False
 
-    def traversePreOrder(self, root: Node):
+    def traversePreOrder(self):
+        self._traversePreOrder(self.root)
+
+    def _traversePreOrder(self, root: Node):
         if root is None:
             return
         print(root.value, end=" ")
-        self.traversePreOrder(root.leftChild)
-        self.traversePreOrder(root.rightChild)
+        self._traversePreOrder(root.leftChild)
+        self._traversePreOrder(root.rightChild)
 
-    def traverseInOrder(self, root: Node):
+    def traverseInOrder(self):
+        self._traverseInOrder(self.root)
+
+    def _traverseInOrder(self, root: Node):
         if root is None:
             return
-        self.traverseInOrder(root.leftChild)
+        self._traverseInOrder(root.leftChild)
         print(root.value, end=" ")
-        self.traverseInOrder(root.rightChild)
+        self._traverseInOrder(root.rightChild)
 
-    def traversePostOrder(self, root: Node):
+    def traversePostOrder(self):
+        self._traversePostOrder(self.root)
+
+    def _traversePostOrder(self, root: Node):
         if root is None:
             return
-        self.traversePostOrder(root.leftChild)
-        self.traversePostOrder(root.rightChild)
+        self._traversePostOrder(root.leftChild)
+        self._traversePostOrder(root.rightChild)
         print(root.value, end=" ")
 
-    def height(self, root: Node):
+    def height(self):
+        return self._height(self.root)
+
+    def _height(self, root: Node):
         if root is None:
             return -1
         if root.leftChild == None and root.rightChild == None:
             return 0
 
-        return 1 + max(self.height(root.leftChild), self.height(root.rightChild))
+        return 1 + max(self._height(root.leftChild), self._height(root.rightChild))
 
     def __str__(self):
         return str(self.root.value)
@@ -82,13 +94,14 @@ tree.insert(7)
 tree.insert(8)
 tree.insert(6)
 tree.insert(2)
-tree.traversePreOrder(tree.root)
+tree.traversePreOrder()
 print()
-tree.traverseInOrder(tree.root)
+tree.traverseInOrder()
 print()
-tree.traversePostOrder(tree.root)
+tree.traversePostOrder()
 print()
-print(tree.height(tree.root))
+print(tree.height())
 # Output: 5 4 3 2 7 6 8
 #         2 3 4 5 6 7 8
 #         2 3 4 6 8 7 5
+#         3
