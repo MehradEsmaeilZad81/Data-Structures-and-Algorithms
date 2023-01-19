@@ -1,10 +1,15 @@
 class AVLTree:
     def __init__(self):
-        self.root = None
+        self._root = None
 
     class AVLNode:
         def __init__(self, value):
-            self.height = 0
-            self.value = value
-            self.leftChild = None
-            self.rightChild = None
+            self._value = value
+            self._leftChild = None
+            self._rightChild = None
+
+        def __str__(self):
+            return str(self._leftChild, self.value, self._rightChild)
+
+    def __str__(self):
+        return str(self._root)
