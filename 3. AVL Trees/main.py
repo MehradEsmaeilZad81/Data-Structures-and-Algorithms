@@ -26,7 +26,27 @@ class AVLTree:
 
         node.height = max(self._height(node.leftChild),
                           self._height(node.rightChild)) + 1
+
+        balanceFactor = self._balanceFactor(node)
+
+        if self._isLeftHeavy(node):
+            self._rotateRight(node)
+
+        elif self._isRightHeavy(node):
+            self._rotateLeft(node)
+
         return self.root
+
+    def _balanceFactor(self, node):
+        if node is None:
+            return 0
+        return self._height(node.leftChild) - self._height(node.rightChild)
+
+    def _isLeftHeavy(self, node):
+        return self._balanceFactor(node) > 1
+
+    def _isRightHeavy(self, node):
+        return self._balanceFactor(node) < -1
 
     def _height(self, node):
         if node is None:
