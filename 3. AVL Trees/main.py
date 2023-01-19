@@ -4,6 +4,7 @@ class AVLTree:
 
     class AVLNode:
         def __init__(self, value):
+            self._height = 0
             self._value = value
             self._leftChild = None
             self._rightChild = None
@@ -26,7 +27,17 @@ class AVLTree:
         else:
             root._rightChild = self._insert(root._rightChild, value)
 
+        root._height = max(self._height(root._leftChild),
+                           self._height(root._rightChild)) + 1
+
+        print("root._height: ", root._height, "root._value: ", root._value)
+
         return root
+
+    def _height(self, node):
+        if node is None:
+            return -1
+        return node._height
 
 
 # Test
@@ -34,4 +45,5 @@ tree = AVLTree()
 tree.insert(10)
 tree.insert(20)
 tree.insert(30)
+tree.insert(40)
 print(tree)
