@@ -6,13 +6,13 @@ class Heap:
     def insert(self, value):
         items[self.size] = value
         self.size += 1
+        self._bubbleUp()
 
+    def _bubbleUp(self):
         index = size - 1
-        parentIndex = self._parent(index)
-        while items[index] > items[parentIndex]:
-            self._swap(index, parentIndex)
-            index = parentIndex
-            parentIndex = self._parent(index)
+        while index > 0 and items[index] > items[self._parent(index)]:
+            self._swap(index, self._parent(index))
+            index = self._parent(index)
 
     def _swap(self, index1, index2):
         items[index1], items[index2] = items[index2], items[index1]
