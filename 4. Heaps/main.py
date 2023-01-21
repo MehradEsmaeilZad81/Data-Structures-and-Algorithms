@@ -18,6 +18,8 @@ class Heap:
         self.items[0] = self.items[self.size]
         self._bubbleDown()
 
+        return self.items[0]
+
     def _resize(self):
         newItems = [None] * (len(self.items) * 2)
         for i in range(self.size):
@@ -47,13 +49,32 @@ class Heap:
         self.items[index1], self.items[index2] = self.items[index2], self.items[index1]
 
     def _isValidParent(self, index):
-        return self.items[index] >= self._leftChild(
-            index) and self.items[index] >= self._rightChild(index)
+        if not self._hasLeftChild(index):
+            return True
+
+        isValid = self.items[index] >= self._leftChild(index)
+
+        if self._hasRightChild(index):
+            isValid &= self.items[index] >= self._rightChild(index)
+
+        return isValid
 
     def _largerChildIndex(self, index):
+        if not self._hasLeftChild(index):
+            return index
+
+        if not self._hasRightChild(index):
+            return self._leftChildIndex(index)
+
         if self._leftChild(index) > self._rightChild(index):
             return self._leftChildIndex(index)
         return self._rightChildIndex(index)
+
+    def _hasLeftChild(self, index):
+        return self._leftChildIndex(index) <= self.size
+
+    def _hasRightChild(self, index):
+        return self._rightChildIndex(index) <= self.size
 
     def _rightChild(self, index):
         return self.items[self._rightChildIndex(index)]
@@ -80,9 +101,7 @@ heap.insert(10)
 heap.insert(5)
 heap.insert(17)
 heap.insert(4)
-heap.insert(20)
-heap.insert(19)
-heap.insert(3)
-
+heap.insert(22)
+heap.remove()
 print(heap)
-# Output: [20, 19, 17, 4, 10, 5, 3]
+# Output: [22, 10, 17, 4]
