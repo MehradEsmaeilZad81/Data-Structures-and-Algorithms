@@ -4,9 +4,20 @@ class Heap:
         self.size = 0
 
     def insert(self, value):
+        if self._isFull():
+            self._resize()
         items[self.size] = value
         self.size += 1
         self._bubbleUp()
+
+    def _resize(self):
+        newItems = [None] * (len(self.items) * 2)
+        for i in range(self.size):
+            newItems[i] = self.items[i]
+        self.items = newItems
+
+    def _isFull(self):
+        return self.size == len(items)
 
     def _bubbleUp(self):
         index = size - 1
