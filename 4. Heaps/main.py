@@ -11,7 +11,7 @@ class Heap:
         self._bubbleUp()
 
     def remove(self):
-        if self._isEmpty():
+        if self.isEmpty():
             raise Exception("Heap is empty")
 
         root = self.items[0]
@@ -27,7 +27,7 @@ class Heap:
             newItems[i] = self.items[i]
         self.items = newItems
 
-    def _isEmpty(self):
+    def isEmpty(self):
         return self.size == 0
 
     def _isFull(self):
@@ -96,6 +96,22 @@ class Heap:
         return str(self.items[:self.size])
 
 
+class PriorityQueue:
+    def __init__(self):
+        self.heap = Heap()
+
+    def enqueue(self, item):
+        self.heap.insert(item)
+
+    def dequeue(self):
+        return self.heap.remove()
+
+    def _isEmpty(self):
+        return self.heap.isEmpty()
+
+    def __str__(self):
+        return str(self.heap)
+
 # Test
 # heap = Heap()
 # heap.insert(10)
@@ -106,6 +122,7 @@ class Heap:
 # heap.remove()
 # print(heap)
 # # Output: [22, 10, 17, 4]
+
 
 def HeapSort(array):
     heap = Heap()
