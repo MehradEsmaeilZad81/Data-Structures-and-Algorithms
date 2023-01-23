@@ -14,11 +14,12 @@ class Heap:
         if self._isEmpty():
             raise Exception("Heap is empty")
 
+        root = self.items[0]
         self.size -= 1
         self.items[0] = self.items[self.size]
         self._bubbleDown()
 
-        return self.items[0]
+        return root
 
     def _resize(self):
         newItems = [None] * (len(self.items) * 2)
@@ -96,12 +97,30 @@ class Heap:
 
 
 # Test
-heap = Heap()
-heap.insert(10)
-heap.insert(5)
-heap.insert(17)
-heap.insert(4)
-heap.insert(22)
-heap.remove()
-print(heap)
-# Output: [22, 10, 17, 4]
+# heap = Heap()
+# heap.insert(10)
+# heap.insert(5)
+# heap.insert(17)
+# heap.insert(4)
+# heap.insert(22)
+# heap.remove()
+# print(heap)
+# # Output: [22, 10, 17, 4]
+
+def HeapSort(array):
+    heap = Heap()
+    for i in range(len(array)):
+        heap.insert(array[i])
+
+    output = []
+
+    for i in range(len(array)):
+        output.append(heap.remove())
+
+    return output
+
+
+# Test
+array = [5, 4, 17, 10, 22]
+print(HeapSort(array))
+# Output: [22, 17, 10, 5, 4]
