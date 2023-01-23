@@ -92,6 +92,11 @@ class Heap:
     def _parent(self, index):
         return (index - 1) // 2
 
+    def max(self):
+        if self.isEmpty():
+            raise Exception("Heap is empty")
+        return self.items[0]
+
     def __str__(self):
         return str(self.items[:self.size])
 
@@ -169,10 +174,25 @@ class MaxHeap:
     def _swap(self, array, first, second):
         array[first], array[second] = array[second], array[first]
 
+    def getKthLargest(self, array, k):
+        if k < 1 or k > len(array):
+            raise Exception("Invalid input")
+
+        heap = Heap()
+        for item in array:
+            heap.insert(item)
+
+        for i in range(k-1):
+            heap.remove()
+
+        return heap.max()
+
 
 # Test
 numbers = [5, 3, 8, 4, 1, 2]
 MaxHeap = MaxHeap()
+print(MaxHeap.getKthLargest(numbers, 3))
 MaxHeap.heapify(numbers)
 print(numbers)
-# Output: [8, 4, 5, 3, 1, 2]
+# Output: 4
+# [8, 4, 5, 3, 1, 2]
