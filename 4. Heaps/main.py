@@ -137,7 +137,41 @@ def HeapSort(array):
     return output
 
 
+# # Test
+# array = [5, 4, 17, 10, 22]
+# print(HeapSort(array))
+# # Output: [22, 17, 10, 5, 4]
+
+
+class MaxHeap:
+    def heapify(self, array):
+        for i in range(len(array)):
+            self._heapify(array, i)
+
+    def _heapify(self, array, index):
+        largerIndex = index
+
+        leftIndex = index * 2 + 1
+        if leftIndex < len(array) and array[leftIndex] > array[largerIndex]:
+            largerIndex = leftIndex
+
+        rightIndex = index * 2 + 2
+        if rightIndex < len(array) and array[rightIndex] > array[largerIndex]:
+            largerIndex = rightIndex
+
+        if index == largerIndex:
+            return
+
+        self._swap(array, index, largerIndex)
+        self._heapify(array, largerIndex)
+
+    def _swap(self, array, first, second):
+        array[first], array[second] = array[second], array[first]
+
+
 # Test
-array = [5, 4, 17, 10, 22]
-print(HeapSort(array))
-# Output: [22, 17, 10, 5, 4]
+numbers = [5, 3, 8, 4, 1, 2]
+MaxHeap = MaxHeap()
+MaxHeap.heapify(numbers)
+print(numbers)
+# Output: [8, 4, 5, 3, 1, 2]
