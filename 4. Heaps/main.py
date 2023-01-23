@@ -145,7 +145,8 @@ def HeapSort(array):
 
 class MaxHeap:
     def heapify(self, array):
-        for i in range(len(array)):
+        lastParentIndex = len(array) // 2 - 1
+        for i in range(lastParentIndex, -1, -1):
             self._heapify(array, i)
 
     def _heapify(self, array, index):
