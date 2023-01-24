@@ -11,3 +11,12 @@ class Trie:
 
         def __str__(self):
             return "Node{" + "value=" + self.value + "}"
+
+    def insert(self, word: str):
+        node = self.root
+        for char in word:
+            index = ord(char) - ord('a')
+            if not node.children[index]:
+                node.children[index] = self.Node(char)
+            node = node.children[index]
+        node.word_finished = True
