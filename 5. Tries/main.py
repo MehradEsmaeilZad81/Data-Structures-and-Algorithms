@@ -2,9 +2,8 @@ class Trie:
 
     class Node:
         def __init__(self, value: str):
-            self.ALPHABET_SIZE = 26
             self.value = value
-            self.children = [None] * self.ALPHABET_SIZE
+            self.children = dict()
             self.word_finished = False
 
         def __str__(self):
@@ -16,10 +15,9 @@ class Trie:
     def insert(self, word: str):
         node = self.root
         for char in word:
-            index = ord(char) - ord('a')
-            if not node.children[index]:
-                node.children[index] = self.Node(char)
-            node = node.children[index]
+            if not node.children.get(char):
+                node.children[char] = self.Node(char)
+            node = node.children.get(char)
         node.word_finished = True
 
 
