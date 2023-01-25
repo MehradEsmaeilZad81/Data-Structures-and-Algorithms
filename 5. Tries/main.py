@@ -4,16 +4,13 @@ class Trie:
         def __init__(self, value: str):
             self.value = value
             self.children = dict()
-            self.word_finished = False
+            self.isEndOfWord = False
 
         def __str__(self):
             return "Node{" + "value=" + self.value + "}"
 
         def hasChild(self, char):
             return char in self.children
-
-        def addChild(self, char):
-            node.children[char] = self.Node(char)
 
         def getChild(self, char):
             return self.children.get(char)
@@ -25,15 +22,26 @@ class Trie:
         node = self.root
         for char in word:
             if not node.hasChild(char):
-                node.addChild(char)
+                node.children[char] = self.Node(char)
             node = node.getChild(char)
-        node.word_finished = True
+        node.isEndOfWord = True
+
+    def contains(self, word: str):
+        if word is None:
+            return False
+        node = self.root
+        for char in word:
+            if not node.hasChild(char):
+                return False
+            node = node.getChild(char)
+        return node.isEndOfWord
 
 
-# Test
+        # Test
 trie = Trie()
 trie.insert("hello")
 trie.insert("world")
 trie.insert("hell")
 trie.insert("heaven")
+print(trie.contains("hel"))
 print("Done")
