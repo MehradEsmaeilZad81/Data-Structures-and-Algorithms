@@ -9,15 +9,24 @@ class Trie:
         def __str__(self):
             return "Node{" + "value=" + self.value + "}"
 
+        def hasChild(self, char):
+            return char in self.children
+
+        def addChild(self, char):
+            node.children[char] = self.Node(char)
+
+        def getChild(self, char):
+            return self.children.get(char)
+
     def __init__(self):
         self.root = self.Node("")
 
     def insert(self, word: str):
         node = self.root
         for char in word:
-            if not node.children.get(char):
-                node.children[char] = self.Node(char)
-            node = node.children.get(char)
+            if not node.hasChild(char):
+                node.addChild(char)
+            node = node.getChild(char)
         node.word_finished = True
 
 
