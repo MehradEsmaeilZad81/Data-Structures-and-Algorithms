@@ -15,6 +15,9 @@ class Trie:
         def getChild(self, char):
             return self.children.get(char)
 
+        def getChildren(self):
+            return self.children.values()
+
     def __init__(self):
         self.root = self.Node("")
 
@@ -36,12 +39,22 @@ class Trie:
             node = node.getChild(char)
         return node.isEndOfWord
 
+    def traverse(self):
+        self._traverse(self.root)
 
-        # Test
+    def _traverse(self, root):
+        print(root.value)
+        for child in root.getChildren():
+            self._traverse(child)
+
+
+# Test
 trie = Trie()
 trie.insert("hello")
 trie.insert("world")
 trie.insert("hell")
 trie.insert("heaven")
 print(trie.contains("hel"))
+print(trie.contains("hello"))
+print(trie.traverse())
 print("Done")
