@@ -69,14 +69,46 @@ class Trie:
         if not child.hasChildren() and not child.isEndOfWord:
             root.children.pop(ch)
 
+    def findWords(self, prefix: str):
+        words = list()
+        lastNode = self._findLastNodeOf(prefix)
+        self._findWords(lastNode, prefix, words)
+
+        return words
+
+    def _findWords(self, root, prefix, words):
+        if root is None:
+            return
+        if root.isEndOfWord:
+            words.append(prefix)
+
+        for child in root.getChildren():
+            self._findWords(child, prefix + child.value, words)
+
+    def _findLastNodeOf(self, prefix: str):
+        if prefix is None:
+            return None
+        node = self.root
+        for char in prefix:
+            child = node.getChild(char)
+            if child is None:
+                return None
+            node = child
+
+        return node
+
 
 # Test
 trie = Trie()
 trie.insert("car")
 trie.insert("care")
+trie.insert("careful")
+trie.insert("card")
 trie.remove("car")
 print(trie.contains("car"))
 print(trie.contains("care"))
-
+words = trie.findWords("ca")
+print(words)
 # Output: False
 #         True
+#         ['care', 'careful', 'card']
