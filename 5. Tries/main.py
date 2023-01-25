@@ -18,6 +18,9 @@ class Trie:
         def getChildren(self):
             return self.children.values()
 
+        def hasChildren(self):
+            return len(self.children) > 0
+
     def __init__(self):
         self.root = self.Node("")
 
@@ -47,14 +50,33 @@ class Trie:
         for child in root.getChildren():
             self._traverse(child)
 
+    def remove(self, word: str):
+        if word is None:
+            return
+        self._remove(self.root, word, 0)
+
+    def _remove(self, root, word, index):
+        if index == len(word):
+            root.isEndOfWord = False
+            return
+
+        ch = word[index]
+        child = root.getChild(ch)
+        if child is None:
+            return
+        self._remove(child, word, index + 1)
+
+        if not child.hasChildren() and not child.isEndOfWord:
+            root.children.pop(ch)
+
 
 # Test
 trie = Trie()
-trie.insert("hello")
-trie.insert("world")
-trie.insert("hell")
-trie.insert("heaven")
-print(trie.contains("hel"))
-print(trie.contains("hello"))
-print(trie.traverse())
-print("Done")
+trie.insert("car")
+trie.insert("care")
+trie.remove("car")
+print(trie.contains("car"))
+print(trie.contains("care"))
+
+# Output: False
+#         True
