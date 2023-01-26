@@ -40,6 +40,20 @@ class Graph:
             raise Exception("Node not found")
         self.adjacencyList[fromNode].remove(toNode)
 
+    def traverseDepthFirst(self, root):
+        if root not in self.nodes.keys():
+            return
+        root = self.nodes[root]
+        visited = set()
+        self._traverseDepthFirst(root, visited)
+
+    def _traverseDepthFirst(self, root, visited):
+        print(root)
+        visited.add(root)
+        for node in self.adjacencyList[root]:
+            if node not in visited:
+                self._traverseDepthFirst(node, visited)
+
     def print(self):
         for node in self.adjacencyList.keys():
             if len(self.adjacencyList[node]) != 0:
@@ -61,15 +75,20 @@ graph.addEdge("D", "A")
 graph.addEdge("C", "D")
 graph.addEdge("B", "C")
 graph.print()
+graph.traverseDepthFirst("C")
 graph.removeEdge("A", "B")
 graph.removeNode("B")
 graph.print()
+graph.traverseDepthFirst("A")
+graph.traverseDepthFirst(root="G")
 # Output:
 # A is connected to: B C
 # B is connected to: C
 # C is connected to: D
 # D is connected to: A
+# C D A B
 #
 # A is connected to: C
 # C is connected to: D
 # D is connected to: A
+# A C D
