@@ -75,6 +75,26 @@ class Graph:
                 if neighbour not in visited:
                     stack.append(neighbour)
 
+    def BreadthFirstTraversal(self, root):
+        if root not in self.nodes.keys():
+            return
+        node = self.nodes[root]
+        visited = set()
+        queue = list()
+        queue.append(node)
+
+        while len(queue) != 0:
+            current = queue.pop(0)
+            if current in visited:
+                continue
+
+            print(current)
+            visited.add(current)
+
+            for neighbour in self.adjacencyList[current]:
+                if neighbour not in visited:
+                    queue.append(neighbour)
+
     def print(self):
         for node in self.adjacencyList.keys():
             if len(self.adjacencyList[node]) != 0:
@@ -96,7 +116,7 @@ graph.addEdge("D", "A")
 graph.addEdge("C", "D")
 graph.addEdge("B", "C")
 graph.print()
-graph.traverseDepthFirst("C")
+graph.BreadthFirstTraversal("C")
 graph.removeEdge("A", "B")
 graph.removeNode("B")
 graph.print()
