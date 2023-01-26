@@ -54,6 +54,27 @@ class Graph:
             if node not in visited:
                 self._traverseDepthFirst(node, visited)
 
+    def DepthFirstTraversal(self, root):
+        if root not in self.nodes.keys():
+            return
+
+        visited = set()
+        node = self.nodes[root]
+        stack = list()
+        stack.append(node)
+
+        while len(stack) != 0:
+            current = stack.pop()
+            if current in visited:
+                continue
+
+            print(current)
+            visited.add(current)
+
+            for neighbour in self.adjacencyList[current]:
+                if neighbour not in visited:
+                    stack.append(neighbour)
+
     def print(self):
         for node in self.adjacencyList.keys():
             if len(self.adjacencyList[node]) != 0:
@@ -81,6 +102,7 @@ graph.removeNode("B")
 graph.print()
 graph.traverseDepthFirst("A")
 graph.traverseDepthFirst(root="G")
+graph.DepthFirstTraversal("A")
 # Output:
 # A is connected to: B C
 # B is connected to: C
@@ -91,4 +113,5 @@ graph.traverseDepthFirst(root="G")
 # A is connected to: C
 # C is connected to: D
 # D is connected to: A
+# A C D
 # A C D
