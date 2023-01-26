@@ -24,14 +24,14 @@ class Graph:
         self.adjacencyList[fromNode].append(toNode)
 
     def removeNode(self, label):
-        node = self.nodes[label]
-        if node == None:
+        rnode = self.nodes[label]
+        if rnode == None:
             raise Exception("Node not found")
         del self.nodes[label]
-        del self.adjacencyList[node]
+        del self.adjacencyList[rnode]
         for node in self.adjacencyList.keys():
-            if node in self.adjacencyList[node]:
-                self.adjacencyList[node].remove(node)
+            if rnode in self.adjacencyList[node]:
+                self.adjacencyList[node].remove(rnode)
 
     def removeEdge(self, label1, label2):
         fromNode = self.nodes[label1]
@@ -46,9 +46,10 @@ class Graph:
         root = self.nodes[root]
         visited = set()
         self._traverseDepthFirst(root, visited)
+        print()
 
     def _traverseDepthFirst(self, root, visited):
-        print(root)
+        print(root, end=" ")
         visited.add(root)
         for node in self.adjacencyList[root]:
             if node not in visited:
@@ -68,12 +69,13 @@ class Graph:
             if current in visited:
                 continue
 
-            print(current)
+            print(current, end=" ")
             visited.add(current)
 
             for neighbour in self.adjacencyList[current]:
                 if neighbour not in visited:
                     stack.append(neighbour)
+        print()
 
     def BreadthFirstTraversal(self, root):
         if root not in self.nodes.keys():
@@ -88,12 +90,13 @@ class Graph:
             if current in visited:
                 continue
 
-            print(current)
+            print(current, end=" ")
             visited.add(current)
 
             for neighbour in self.adjacencyList[current]:
                 if neighbour not in visited:
                     queue.append(neighbour)
+        print()
 
     def print(self):
         for node in self.adjacencyList.keys():
@@ -115,23 +118,30 @@ graph.addEdge("A", "C")
 graph.addEdge("D", "A")
 graph.addEdge("C", "D")
 graph.addEdge("B", "C")
+graph.addEdge("C", "A")
+graph.addEdge("C", "B")
 graph.print()
 graph.BreadthFirstTraversal("C")
+graph.DepthFirstTraversal("C")
 graph.removeEdge("A", "B")
 graph.removeNode("B")
 graph.print()
+graph.BreadthFirstTraversal("C")
+graph.DepthFirstTraversal("C")
 graph.traverseDepthFirst("A")
 graph.traverseDepthFirst(root="G")
 graph.DepthFirstTraversal("A")
 # Output:
 # A is connected to: B C
 # B is connected to: C
-# C is connected to: D
+# C is connected to: D A B
 # D is connected to: A
 # C D A B
-#
+# C B A D
 # A is connected to: C
-# C is connected to: D
+# C is connected to: D A
 # D is connected to: A
+# C D A
+# C A D
 # A C D
 # A C D
