@@ -98,6 +98,29 @@ class Graph:
                     queue.append(neighbour)
         print()
 
+    def topologicalSort(self):
+        visited = set()
+        stack = list()
+        for node in self.nodes.values():
+            self._topologicalSort(node, visited, stack)
+
+        sorted = list()
+        while len(stack) != 0:
+            sorted.append(stack.pop().label)
+
+        return sorted
+
+    def _topologicalSort(self, node, visited, stack):
+        if node in visited:
+            return
+
+        visited.add(node)
+
+        for neighbour in self.adjacencyList[node]:
+            self._topologicalSort(neighbour, visited, stack)
+
+        stack.append(node)
+
     def print(self):
         for node in self.adjacencyList.keys():
             if len(self.adjacencyList[node]) != 0:
@@ -107,41 +130,39 @@ class Graph:
                 print()
 
 
+# graph = Graph()
+# graph.addNode("A")
+# graph.addNode("B")
+# graph.addNode("C")
+# graph.addNode("D")
+# graph.addEdge("A", "B")
+# graph.addEdge("A", "C")
+# graph.addEdge("D", "A")
+# graph.addEdge("C", "D")
+# graph.addEdge("B", "C")
+# graph.addEdge("C", "A")
+# graph.addEdge("C", "B")
+# graph.print()
+# graph.BreadthFirstTraversal("C")
+# graph.DepthFirstTraversal("C")
+# graph.removeEdge("A", "B")
+# graph.removeNode("B")
+# graph.print()
+# graph.BreadthFirstTraversal("C")
+# graph.DepthFirstTraversal("C")
+# graph.traverseDepthFirst("A")
+# graph.traverseDepthFirst(root="G")
+# graph.DepthFirstTraversal("A")
+
 # Test
 graph = Graph()
+graph.addNode("X")
 graph.addNode("A")
 graph.addNode("B")
-graph.addNode("C")
-graph.addNode("D")
-graph.addEdge("A", "B")
-graph.addEdge("A", "C")
-graph.addEdge("D", "A")
-graph.addEdge("C", "D")
-graph.addEdge("B", "C")
-graph.addEdge("C", "A")
-graph.addEdge("C", "B")
-graph.print()
-graph.BreadthFirstTraversal("C")
-graph.DepthFirstTraversal("C")
-graph.removeEdge("A", "B")
-graph.removeNode("B")
-graph.print()
-graph.BreadthFirstTraversal("C")
-graph.DepthFirstTraversal("C")
-graph.traverseDepthFirst("A")
-graph.traverseDepthFirst(root="G")
-graph.DepthFirstTraversal("A")
-# Output:
-# A is connected to: B C
-# B is connected to: C
-# C is connected to: D A B
-# D is connected to: A
-# C D A B
-# C B A D
-# A is connected to: C
-# C is connected to: D A
-# D is connected to: A
-# C D A
-# C A D
-# A C D
-# A C D
+graph.addNode("P")
+graph.addEdge("X", "A")
+graph.addEdge("X", "B")
+graph.addEdge("A", "P")
+graph.addEdge("B", "P")
+list = graph.topologicalSort()
+print(list)
