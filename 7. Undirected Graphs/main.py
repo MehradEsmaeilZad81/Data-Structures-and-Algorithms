@@ -19,3 +19,38 @@ class WeightedGraph:
     def __init__(self):
         self.nodes = dict()
         self.adjacencyList = dict()
+
+    def addNode(self, label):
+        node = self.Node(label)
+        self.nodes[label] = node
+        self.adjacencyList[node] = list()
+
+    def addEdge(self, label1, label2, weight):
+        fromNode = self.nodes[label1]
+        toNode = self.nodes[label2]
+        if fromNode == None or toNode == None:
+            raise Exception("Node not found")
+        self.adjacencyList[fromNode].append(
+            self.Edge(fromNode, toNode, weight))
+        self.adjacencyList[toNode].append(
+            self.Edge(toNode, fromNode, weight))
+
+    def print(self):
+        for fromNode, edges in self.adjacencyList.items():
+            for edge in edges:
+                print(edge)
+
+
+# Test
+graph = WeightedGraph()
+graph.addNode("A")
+graph.addNode("B")
+graph.addNode("C")
+graph.addNode("D")
+
+graph.addEdge("A", "B", 10)
+graph.addEdge("A", "C", 20)
+graph.addEdge("B", "D", 30)
+graph.addEdge("C", "D", 40)
+
+graph.print()
