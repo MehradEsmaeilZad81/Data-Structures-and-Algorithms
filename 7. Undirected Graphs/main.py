@@ -35,6 +35,30 @@ class WeightedGraph:
         self.adjacencyList[toNode].append(
             self.Edge(toNode, fromNode, weight))
 
+    def getShortestDistance(self, label1, label2):
+        fromNode = self.nodes[label1]
+        toNode = self.nodes[label2]
+        distances = dict()
+        for node in self.nodes.values():
+            distances[node] = float("inf")
+        distances[fromNode] = 0
+
+        visited = set()
+        queue = list()
+        queue.append(fromNode)
+        while len(queue) > 0:
+            node = queue.pop(0)
+            visited.add(node)
+            for edge in self.adjacencyList[node]:
+                if edge.toNode in visited:
+                    continue
+                newDistance = distances[node] + edge.weight
+                if newDistance < distances[edge.toNode]:
+                    distances[edge.toNode] = newDistance
+                queue.append(edge.toNode)
+
+        return distances[toNode]
+
     def print(self):
         for fromNode, edges in self.adjacencyList.items():
             for edge in edges:
@@ -54,3 +78,7 @@ graph.addEdge("B", "D", 30)
 graph.addEdge("C", "D", 40)
 
 graph.print()
+print("A --> D",graph.getShortestDistance("A", "D"))
+print("A --> B",graph.getShortestDistance("A", "B"))
+print("B --> D",graph.getShortestDistance("B", "D"))
+print("C --> D",graph.getShortestDistance("C", "D"))
